@@ -1,0 +1,8 @@
+feather-lib.cflags
+feather-lib.config
+feather-lib.creator
+feather-lib.creator.user
+feather-lib.cxxflags
+feather-lib.files
+feather-lib.includes
+build/*
