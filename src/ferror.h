@@ -2,6 +2,7 @@
 #define FERROR_H
 #include <stdio.h>
 namespace fth {
+    // not fully implemented so some code is in the header for the moment but will be moved in the c++ file ;) 
     #define FEATHER_SUCCESS 0
     class ferror{
     public:
