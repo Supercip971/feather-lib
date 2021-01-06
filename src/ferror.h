@@ -11,7 +11,7 @@ namespace fth {
         ferror(const char* error_string, int error_code, int line, const char* file);
         ferror() = default;
         void log_error() const;
-
+        void log_if_error() const;
         operator bool() const {
             return code == FEATHER_SUCCESS;
         }

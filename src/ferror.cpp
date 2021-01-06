@@ -11,9 +11,15 @@ namespace fth {
 
     void ferror::log_error() const{
         if(has_file_info){
-            fprintf(stderr, "[ ERROR ] (feather) error in file %s line %i : %i : %s \n", err_file, err_line, code, error_str);
+            fprintf(stderr, "[ ERROR ] (feather) error (#%i) in file %s line %i : %s \n", code, err_file, err_line, error_str);
         }else{
-            fprintf(stderr, "[ ERROR ] (feather) error %i : %s \n", code, error_str);
+            fprintf(stderr, "[ ERROR ] (feather) error (#%i) : %s \n", code, error_str);
+        }
+    }
+
+    void ferror::log_if_error() const{
+        if(code != FEATHER_SUCCESS){
+            log_error();
         }
     }
 
