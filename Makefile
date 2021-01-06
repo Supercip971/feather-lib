@@ -15,7 +15,7 @@ all: $(OBJFILES)
 
 	@echo "[ FEATHER ] (exe) linking $<" 
 	@$(GCC) $(OBJFILES) -fpermissive -pthread -o build/feather 
-	@make -C . run
+
 run:
 	./build/feather 
 
