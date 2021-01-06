@@ -13,20 +13,22 @@ namespace fth {
         BUFFER_ALREADY_ALLOCATED,   // create_buffer()
     };
 
-    typedef void* cbuffer;
-    typedef uint64_t buffer_size_t;
+    using cbuffer = void*;
+    using buffer_size_t = uint64_t;
     class raw_buffer
     {
     public:
 
         raw_buffer() = default;
         raw_buffer(buffer_size_t size);
-        raw_buffer_result create_buffer(buffer_size_t size);
-        raw_buffer_result delete_buffer();
+
+        ferror create(buffer_size_t size);      // malloc
+        ferror destroy();                       // free
+        ferror increase(buffer_size_t new_size);// realloc
+
         buffer_size_t get_buffer_size() const {
             return buffer_size;
         }
-        raw_buffer_result increase_buffer(buffer_size_t new_size);
 
         // warning: can return nullptr
         cbuffer get() const {
