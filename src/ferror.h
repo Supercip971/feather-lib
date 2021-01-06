@@ -5,6 +5,7 @@ namespace fth {
     // not fully implemented so some code is in the header for the moment but will be moved in the c++ file ;) 
     #define FEATHER_SUCCESS 0
 
+    #define feather_noerror feather_error("success", raw_buffer_result::NO_ERROR);
     #define feather_error(error_str, error_code) fth::ferror(error_str,error_code, __LINE__,__FILE__)
     class ferror{
     public:
