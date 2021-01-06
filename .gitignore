@@ -6,3 +6,4 @@ feather-lib.cxxflags
 feather-lib.files
 feather-lib.includes
 build/*
+*.o
