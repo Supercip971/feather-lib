@@ -4,6 +4,7 @@
 #include "ferror.h"
 #include "non_null.h"
 #include "terminal/term_color.h"
+#include <atomic>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -62,11 +63,30 @@ int fbuffer_checks()
     }
     return 0;
 }
+
+int ftype_test()
+{
+    if (!fth::is_same<int, int>().value)
+    {
+        return 1;
+    }
+    if (fth::is_same<unsigned int, int>().value)
+    {
+        return 2;
+    }
+    if (!fth::is_same<fth::remove_const_volatile<const int>::type, int>().value)
+    {
+        return 3;
+    }
+
+    return 0;
+}
 checks chk[] = {
     {"error_test", error_testing},
     {"ferror_test", ferror_checks},
     {"ferror_noerror_test", ferror_noerror_checks},
-    {"fbuffer_test", fbuffer_checks}
+    {"fbuffer_test", fbuffer_checks},
+    {"ftypes_test", ftype_test},
 };
 
 int main(int argc, char *argv[])
