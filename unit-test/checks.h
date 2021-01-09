@@ -4,7 +4,7 @@
 #define CHECKS_COUNT 1
 struct checks
 {
-    const char* test_name;
+    const char *test_name;
     int (*call)();
 };
 

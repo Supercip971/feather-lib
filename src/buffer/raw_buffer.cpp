@@ -1,7 +1,8 @@
 #include "raw_buffer.h"
 #include <stdio.h>
 #include <stdlib.h>
-namespace fth {
+namespace fth
+{
 
     raw_buffer::raw_buffer(buffer_size_t size) : raw_buffer()
     {
@@ -9,17 +10,26 @@ namespace fth {
         create(size);
     }
 
-    ferror raw_buffer::create(buffer_size_t size){
+    ferror raw_buffer::create(buffer_size_t size)
+    {
 
-        if(size == 0){
+        if (size == 0)
+        {
             return feather_error("not valid buffer size", raw_buffer_result::NOT_VALID_SIZE);
-        }else if(is_allocated){
+        }
+        else if (is_allocated)
+        {
             return feather_error("buffer already allocated", raw_buffer_result::BUFFER_ALREADY_ALLOCATED);
-        }else{
+        }
+        else
+        {
             raw = malloc(size);
-            if(raw == nullptr){
+            if (raw == nullptr)
+            {
                 return feather_error("malloc can't allocate buffer", raw_buffer_result::BUFFER_NOT_ALLOCATED);
-            }else{
+            }
+            else
+            {
                 is_allocated = true;
                 buffer_size = size;
             }
@@ -27,30 +37,43 @@ namespace fth {
         return feather_noerror;
     }
 
-    ferror raw_buffer::destroy(){
-        if(!is_allocated){
+    ferror raw_buffer::destroy()
+    {
+        if (!is_allocated)
+        {
             return feather_error("buffer is already free", raw_buffer_result::BUFFER_ALREADY_FREE);
-        }else{
+        }
+        else
+        {
             free(raw);
             buffer_size = 0;
         }
         return feather_noerror;
     }
 
-    ferror raw_buffer::increase(buffer_size_t new_size){
-        if(new_size <= buffer_size){
+    ferror raw_buffer::increase(buffer_size_t new_size)
+    {
+        if (new_size <= buffer_size)
+        {
             return feather_noerror;
-        }else if(!is_allocated){
+        }
+        else if (!is_allocated)
+        {
             return feather_error("buffer not allocated while calling increase_buffer()", raw_buffer_result::BUFFER_NOT_ALLOCATED);
-        }else{
-            raw = realloc(raw,new_size);
-            if(raw == nullptr){
+        }
+        else
+        {
+            raw = realloc(raw, new_size);
+            if (raw == nullptr)
+            {
                 return feather_error("realloc can't reallocate buffer", raw_buffer_result::BUFFER_NOT_ALLOCATED);
-            }else{
+            }
+            else
+            {
                 is_allocated = true;
                 buffer_size = new_size;
             }
         }
         return feather_noerror;
     }
-}
+} // namespace fth
